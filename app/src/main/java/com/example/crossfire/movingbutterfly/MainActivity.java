@@ -1,31 +1,28 @@
 package com.example.crossfire.movingbutterfly;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.welcome_button);
 
-        final ButterFly butterfly = new ButterFly(MainActivity.this);
-
-        butterfly.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                butterfly.bitmapX = event.getX()-200;
-                butterfly.bitmapY = event.getY()-100;
-                butterfly.invalidate();
-                return true;
-            }
-        });
-
-        RelativeLayout layout = (RelativeLayout)findViewById(R.id.layout1);
-        layout.addView(butterfly);
+        Button button1 = (Button)findViewById(R.id.button1);
+        if (button1 != null) {
+            button1.setOnClickListener((new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this,FlyActivity.class);
+                    startActivity(intent);
+                }
+            }));
+        }
     }
 }
